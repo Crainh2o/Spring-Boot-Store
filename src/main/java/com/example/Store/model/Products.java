@@ -1,5 +1,7 @@
 package com.example.Store.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,21 @@ public class Products {
 
     @Column
     private String description;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "orders_id")
+    private Orders orders;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
+
+
+
+
+
 
     public Products() {
     }
