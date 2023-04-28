@@ -26,7 +26,7 @@ public class UserService {
     }
 
     public User createUser(User userObject) {
-
+        User user = userRepository.findUserByEmailAddress(userObject.getEmailAddress());
         return userObject;
     }
 }
