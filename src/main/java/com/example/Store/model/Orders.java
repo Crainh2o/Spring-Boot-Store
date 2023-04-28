@@ -1,6 +1,11 @@
 package com.example.Store.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -19,6 +24,15 @@ public class Orders {
 
     @Column
     private String price;
+
+    @OneToMany(mappedBy = "orders", orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Products> productsList;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
     public Orders() {
     }

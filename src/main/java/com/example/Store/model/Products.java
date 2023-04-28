@@ -31,11 +31,6 @@ public class Products {
     @JsonIgnore
     private User user;
 
-
-
-
-
-
     public Products() {
     }
 
