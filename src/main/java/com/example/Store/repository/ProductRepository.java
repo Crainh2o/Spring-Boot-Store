@@ -18,4 +18,7 @@ public interface ProductRepository extends JpaRepository<Products, Long> {
     Products findByNameAndId(Long userId, Long productsId);
 
     Optional<Products> findByIdAndUserId(Long id);
+
+    void setUser(User currentLoggedInUser);
 }
+
