@@ -1,6 +1,6 @@
 package com.example.Store.service;
 
-import com.example.Store.exception.InvalidCredentialsException;
+import com.example.Store.exception.InformationNotFoundException;
 import com.example.Store.model.User;
 import com.example.Store.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,11 @@ public class UserService {
     }
 
     public User login(String username, String password) {
-        User user = userRepository.findByUserName(username);
+        User user = userRepository.findByUserName(username, password);
         if (user != null && user.getPassword().equals(password)) {
             return user;
         } else {
-            throw new InvalidCredentialsException("Invalid username or password");
+            throw new InformationNotFoundException("Invalid username or password");
         }
     }
 
