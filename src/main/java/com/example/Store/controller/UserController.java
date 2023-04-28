@@ -1,5 +1,6 @@
 package com.example.Store.controller;
 
+import com.example.Store.model.User;
 import com.example.Store.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,12 @@ public class UserController{
         this.userService = userService;
     }
 
-//    //http://localhost:9094/auth/users/login/
-//    @PostMapping(path = "/login/")
-//    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
-//        return userService.loginUser(loginRequest);
-//    }
+    //http://localhost:9094/auth/users/register/
+    @PostMapping(path = "/register/")
+    public User createUser(@RequestBody User userObject) {
+        return userService.createUser(userObject);
+    }
+
     //http://localhost:9094/auth/users/login/
     @PostMapping(path = "/auth/users/login/")
     public String userLogin(@RequestBody String body) {
@@ -31,3 +33,8 @@ public class UserController{
 
 
 
+//    //http://localhost:9094/auth/users/login/
+//    @PostMapping(path = "/login/")
+//    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+//        return userService.loginUser(loginRequest);
+//    }

@@ -25,4 +25,8 @@ public class UserService {
         }
     }
 
+    public User createUser(User userObject) {
+
+        return userObject;
+    }
 }
