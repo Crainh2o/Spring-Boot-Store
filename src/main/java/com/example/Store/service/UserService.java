@@ -4,11 +4,20 @@ import com.example.Store.exception.InformationExistException;
 import com.example.Store.exception.InformationNotFoundException;
 import com.example.Store.model.User;
 import com.example.Store.repository.UserRepository;
+import com.example.Store.security.JWTUtils;
+import com.example.Store.security.MyUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import javax.management.remote.JMXAuthenticator;
+import java.net.Authenticator;
+
 @Service
-public class UserService {
+public class UserService<LoginRequest> {
 
     private UserRepository userRepository;
 
@@ -26,17 +35,17 @@ public class UserService {
         }
     }
 
-//    public User createUser(User userObject) {
-//        User user = userRepository.findUserByEmailAddress(userObject.getEmailAddress());
-//        return userObject;
-//        if (!userRepository.existsByEmailAddress(userObject.getEmailAddress())) {
-//            userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
-//            return userRepository.save(userObject);
-//        } else {
-//            throw new InformationExistException("user with email address " + userObject.getEmailAddress() +
-//                    " already exists");
-//        }
-//    }
+    public User createUser(User userObject) {
+        User user = userRepository.findUserByEmailAddress(userObject.getEmailAddress());
+        return userObject;
+        if (!userRepository.existsByEmailAddress(userObject.getEmailAddress())) {
+            userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
+            return userRepository.save(userObject);
+        } else {
+            throw new InformationExistException("user with email address " + userObject.getEmailAddress() +
+                    " already exists");
+        }
+    }
 
     public User findUserByEmailAddress(String email) {
         return userRepository.findUserByEmailAddress(email);
@@ -45,19 +54,21 @@ public class UserService {
     public User createUser(User userObject) {
         return null;
     }
-}
 
-//public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
-//        try {
-//        Authentication authentication = authenticationManager.authenticate(
-//        new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        myUserDetails = (MyUserDetails) authentication.getPrincipal();
-//
-//final String JWT = jwtUtils.generateJwtToken(myUserDetails);
-//        return ResponseEntity.ok(new LoginResponse(JWT));
-//        } catch (Exception e) {
-//        return ResponseEntity.ok(new LoginResponse("Error : username or password is incorrect"));
-//        }
-//        }
-//        }
+
+public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
+        try {
+            Authentication authenticationManager = null;
+            Authentication authentication = authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+            MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
+
+            JWTUtils jwtUtils = null;
+            final String JWT = jwtUtils.generateJwtToken(myUserDetails);
+        return ResponseEntity.ok(new LoginResponse(JWT));
+        } catch (Exception e) {
+        return ResponseEntity.ok(new LoginResponse("Error : username or password is incorrect"));
+        }
+        }
+        }
