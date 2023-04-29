@@ -41,6 +41,10 @@ public class UserService {
     public User findUserByEmailAddress(String email) {
         return userRepository.findUserByEmailAddress(email);
     }
+
+    public User createUser(User userObject) {
+        return null;
+    }
 }
 
 //public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
