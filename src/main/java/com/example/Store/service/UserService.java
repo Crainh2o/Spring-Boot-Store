@@ -3,6 +3,8 @@ package com.example.Store.service;
 import com.example.Store.exception.InformationExistException;
 import com.example.Store.exception.InformationNotFoundException;
 import com.example.Store.model.User;
+import com.example.Store.model.request.LoginRequest;
+import com.example.Store.model.response.LoginResponse;
 import com.example.Store.repository.UserRepository;
 import com.example.Store.security.JWTUtils;
 import com.example.Store.security.MyUserDetails;
@@ -13,11 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.management.remote.JMXAuthenticator;
-import java.net.Authenticator;
-
 @Service
-public class UserService<LoginRequest> {
+public class UserService {
 
     private UserRepository userRepository;
 
@@ -54,17 +53,16 @@ public class UserService<LoginRequest> {
     public User createUser(User userObject) {
         return null;
     }
-
+}
 
 public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
         try {
-            Authentication authenticationManager = null;
-            Authentication authentication = authenticationManager.authenticate(
+        Authentication authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
             MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
 
-            JWTUtils jwtUtils = null;
+            JWTUtils jwtUtils;
             final String JWT = jwtUtils.generateJwtToken(myUserDetails);
         return ResponseEntity.ok(new LoginResponse(JWT));
         } catch (Exception e) {
