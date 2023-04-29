@@ -26,17 +26,17 @@ public class UserService {
         }
     }
 
-    public User createUser(User userObject) {
-        User user = userRepository.findUserByEmailAddress(userObject.getEmailAddress());
-        return userObject;
-        if (!userRepository.existsByEmailAddress(userObject.getEmailAddress())) {
-            userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
-            return userRepository.save(userObject);
-        } else {
-            throw new InformationExistException("user with email address " + userObject.getEmailAddress() +
-                    " already exists");
-        }
-    }
+//    public User createUser(User userObject) {
+//        User user = userRepository.findUserByEmailAddress(userObject.getEmailAddress());
+//        return userObject;
+//        if (!userRepository.existsByEmailAddress(userObject.getEmailAddress())) {
+//            userObject.setPassword(passwordEncoder.encode(userObject.getPassword()));
+//            return userRepository.save(userObject);
+//        } else {
+//            throw new InformationExistException("user with email address " + userObject.getEmailAddress() +
+//                    " already exists");
+//        }
+//    }
 
     public User findUserByEmailAddress(String email) {
         return userRepository.findUserByEmailAddress(email);
