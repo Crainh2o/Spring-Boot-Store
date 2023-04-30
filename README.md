@@ -25,12 +25,14 @@ Building a Simple Spring-like Dependency Injection Framework in Java. Combine re
 - Maven 
 
 Security 
+
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-security</artifactId>
 </dependency>
 
 JWE, JWS, and JWT
+
 <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
 <dependency>
     <groupId>io.jsonwebtoken</groupId>
