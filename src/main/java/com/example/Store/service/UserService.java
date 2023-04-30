@@ -8,12 +8,14 @@ import com.example.Store.model.response.LoginResponse;
 import com.example.Store.repository.UserRepository;
 import com.example.Store.security.JWTUtils;
 import com.example.Store.security.MyUserDetails;
+import org.apache.catalina.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import sun.management.jmxremote.ConnectorBootstrap;
 
 @Service
 public class UserService {
@@ -53,11 +55,12 @@ public class UserService {
     public User createUser(User userObject) {
         return null;
     }
-}
+
 
 public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
         try {
-        Authentication authentication = authenticationManager.authenticate(
+            Authenticator authenticationManager = null;
+            Authentication authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
             MyUserDetails myUserDetails = (MyUserDetails) authentication.getPrincipal();
