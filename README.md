@@ -3,7 +3,7 @@
 
 Building a Simple Spring-like Dependency Injection Framework in Java. Combine reflections and annotations to build powerful libraries and frameworks. Frameworks like Spring, Hibernate, etc. make the life of java programmers easy. These frameworks give us a lot of superpowers. For e.g., you can magically inject objects in spring by annotating with just an Autowired annotation. In this mini project, I used all the tools we learned to get a successful output of a token. 
 
-#Technologies
+# Technologies
 - ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
 - ![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
 - ![PostgresSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
